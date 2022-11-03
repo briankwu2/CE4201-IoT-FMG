@@ -20,6 +20,7 @@ def printTestMsg(didPass:bool,msg:str):
 # health checker
 try:
     response1 = requests.get(url)
+    print(response1.json())
     if response1.status_code == 200:
         printTestMsg(True,"health check")
     else:
@@ -45,9 +46,23 @@ try:
     gp_data = {'grandpaID': '2'}
     response3 = requests.get(url+'/grandpa_data/',params=gp_data)
     print(response3.json())
-    if response3.status_code == 500:
+    if response3.json()['status'] == 500:
         printTestMsg(True,"incorrect grandpa retrival")
     else:
         printTestMsg(False,"incorrect grandpa retrival")
 except:
     printTestMsg(False,"incorrect grandpa retrival")
+
+
+
+# test 4 gets correct grandpa
+try:
+    gp_data = {'grandpaID': 'miguel123'}
+    response3 = requests.get(url+'/grandpa_data/',params=gp_data)
+    print(response3.json())
+    if response3.json()['status'] == 200:
+        printTestMsg(True,"correct grandpa retrival")
+    else:
+        printTestMsg(False,"correct grandpa retrival")
+except:
+    printTestMsg(False,"correct grandpa retrival")

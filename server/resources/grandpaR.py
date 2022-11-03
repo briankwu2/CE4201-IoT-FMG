@@ -21,7 +21,7 @@ class GrandpaR(Resource):
         tempGrandpa.username = usrName
         print(tempGrandpa)
         self.db.session.add(tempGrandpa) # adds to db
-        self.db.commit() # commits chagnes to db
+        self.db.session.commit() # commits chagnes to db
         return 200
     def get(self):
         gID = request.args['grandpaID'] # grandpa id = username
@@ -43,7 +43,11 @@ class GrandpaR(Resource):
         # returns the grandpa object if found otherwise returns false
         try:
             temp_grandPa = self.grandpaModel.query.filter_by(username=username).first() # should only be one since it is uniques
-            return temp_grandPa
+            if temp_grandPa != None:
+
+                return temp_grandPa
+            else:
+                return False
         except:
             return False
     
