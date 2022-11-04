@@ -93,4 +93,4 @@ def printAllInDB(database):
 with app.app_context():
     testUserAdd(db)
     #printAllInDB(db)
-app.run(debug=True)
+app.run(debug=False)
