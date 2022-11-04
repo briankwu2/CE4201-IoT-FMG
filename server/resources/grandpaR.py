@@ -17,17 +17,22 @@ class GrandpaR(Resource):
         print(request.form)
         usrName = request.form['username']
         print("username extracted: " + usrName)
-        tempGrandpa = self.grandpaModel() # creats empty grandpa
-        tempGrandpa.username = usrName
-        print(tempGrandpa)
-        self.db.session.add(tempGrandpa) # adds to db
-        self.db.session.commit() # commits chagnes to db
-        return 200
+        grandPaLookup = self.safeLookUpGrandpa(usrName)
+        if grandPaLookup == False:
+
+            tempGrandpa = self.grandpaModel() # creats empty grandpa
+            tempGrandpa.username = usrName
+            print(tempGrandpa)
+            self.db.session.add(tempGrandpa) # adds to db
+            self.db.session.commit() # commits chagnes to db
+            return {'status': 200, 'msg': 'Grandpa created successfully'}
+        else:
+            return {'status': 500, 'msg': 'Grandpa already exists'}
     def get(self):
         gID = request.args['grandpaID'] # grandpa id = username
         tempGrandpa = self.safeLookUpGrandpa(gID)
         if tempGrandpa != False:
-            return {'status': 200, 'grandpaID':tempGrandpa.username,'history': tempGrandpa.history}
+            return {'status': 200, 'grandpaID':tempGrandpa.username,'history': self.constructHistoryJson(tempGrandpa.history)}
         else:
             return {'status':500, 'msg': "Unable to find grandpa in database"} # error getting grandpa
         # point1 = {'time': 1234,'lat': 0, 'lon': 0,'bpm': 100}
@@ -52,9 +57,11 @@ class GrandpaR(Resource):
             return False
     
 
-    def constructHistoryJson(history)->dict:
-        # reds history array and constructs dict
+    def constructHistoryJson(self,history)->dict:
+        # reds history array and constructs array of dic
 
-        historyDic = {}
+        historyDicArr = []
         for i in range(0,len(history)):
-            historyDic[str(history[i].time)] = hist
+            currentPoint = history[i]
+            historyDicArr.append({'id':currentPoint.id, 'time':currentPoint.time,'lat':currentPoint.lat, 'log': currentPoint.log, 'bpm': currentPoint.bpm})
+        return historyDicArr

@@ -47,7 +47,7 @@ class PointLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     time = db.Column(db.Integer,nullable=False) # in unix time
     lat = db.Column(db.Float, nullable=False)
-    log = db.Column(db.Integer, nullable=False)
+    log = db.Column(db.Float, nullable=False)
     bpm = db.Column(db.Integer, nullable=False)
     grandpaID = db.Column(db.Integer,db.ForeignKey('grandpa.id'),nullable=False)
 

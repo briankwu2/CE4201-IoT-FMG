@@ -8,7 +8,7 @@ from sqlalchemy import true
 url = 'http://127.0.0.1:5000'
 pasColor = '\33[92m'
 failColor = '\33[91m'
-
+normalColor = '\33[0m'
 def printTestMsg(didPass:bool,msg:str):
     currentColor = pasColor if didPass else failColor
     currentLegend = "PASS " if didPass else "FAIL "
@@ -33,7 +33,7 @@ try:
     gp_data = {'username': 'miguel123'}
     response2 = requests.post(url+'/grandpa_data/',data=gp_data)
     print(response2.json())
-    if response2.status_code == 200:
+    if response2.json()['status'] == 200:
         printTestMsg(True,"grandpa creation")
     else:
         printTestMsg(False,"grandpa creation")
@@ -66,3 +66,16 @@ try:
         printTestMsg(False,"correct grandpa retrival")
 except:
     printTestMsg(False,"correct grandpa retrival")
+
+
+# test 5 log position for grandpa
+try:
+    gp_data = {'grandpaID': 'miguel123','bpm': 70, 'lat': 100, 'log': 200, 'time': 1}
+    response3 = requests.post(url+'/log_grandpa_data/',data=gp_data)
+    print(response3.json())
+    if response3.json()['status'] == 200:
+        printTestMsg(True,"log grandpa pos")
+    else:
+        printTestMsg(False,"log grandpa pos")
+except:
+    printTestMsg(False,"log grandpa pos")
