@@ -5,7 +5,7 @@ import 'dart:convert' as convert;
 
 class NetowrkManager {
   static final NetowrkManager _netowrkManager = NetowrkManager._internal();
-  static final String fmgURL = "127.0.0.1:5000";
+  static final String fmgURL = '127.0.0.1:5000';
 
   factory NetowrkManager() {
     return _netowrkManager;
@@ -17,16 +17,31 @@ class NetowrkManager {
     // gets grandpa from database and
 
     // get grandpa and save it
-    Map<String, dynamic> parmsReq = {'grandpaID': username};
+    Map<String, String> parmsReq = {'grandpaID': username};
+    print("Creating url");
+    //var parsedURL = Uri.parse(fmgURL);
+    //print(parsedURL);
+
     var url = Uri.http(fmgURL, "/grandpa_data/", parmsReq);
-    var response = await http.get(url);
-    if (response.statusCode == 200) {
-      // print(response.statusCode);
-      print("response successful");
-      // var jsonResponse = convert.jsonDecode(response.body) as Map<String, dynamic>;
-      // print(jsonResponse.toString());
-    } else {
-      print('Request failed with status: ${response.statusCode}.');
+    // var url = Uri.parse('http://127.0.0.1:5000/');
+    print(url);
+    try {
+      var response = await http.get(url);
+      print(response.statusCode);
+      var jsonDecoded = convert.jsonDecode(response.body);
+      print(jsonDecoded);
+    } catch (e) {
+      print(e);
     }
+    // var response = await http.get(url);
+    // print(response);
+    // if (response.statusCode == 200) {
+    //   // print(response.statusCode);
+    //   print("response successful");
+    //   // var jsonResponse = convert.jsonDecode(response.body) as Map<String, dynamic>;
+    //   // print(jsonResponse.toString());
+    // } else {
+    //   print('Request failed with status: ${response.statusCode}.');
+    // }
   }
 }

@@ -2,6 +2,8 @@
 
 from flask_restful import Resource
 from flask import request
+from flask import Response
+import json
 
 
 class GrandpaR(Resource):
@@ -19,22 +21,38 @@ class GrandpaR(Resource):
         print("username extracted: " + usrName)
         grandPaLookup = self.safeLookUpGrandpa(usrName)
         if grandPaLookup == False:
-
+            
             tempGrandpa = self.grandpaModel() # creats empty grandpa
             tempGrandpa.username = usrName
             print(tempGrandpa)
             self.db.session.add(tempGrandpa) # adds to db
             self.db.session.commit() # commits chagnes to db
-            return {'status': 200, 'msg': 'Grandpa created successfully'}
+            r = Response('Grandpa created successfully')
+            r.status = 200
+            #return {'status': 200, 'msg': 'Grandpa created successfully'}
+            return r
         else:
-            return {'status': 500, 'msg': 'Grandpa already exists'}
+            r = Response('Grandpa already exists')
+            r.status = 500
+            return r #{'status': 500, 'msg': 'Grandpa already exists'}
     def get(self):
         gID = request.args['grandpaID'] # grandpa id = username
         tempGrandpa = self.safeLookUpGrandpa(gID)
+        
         if tempGrandpa != False:
-            return {'status': 200, 'grandpaID':tempGrandpa.username,'history': self.constructHistoryJson(tempGrandpa.history)}
+            dic = {'grandpaID':tempGrandpa.username,'history': self.constructHistoryJson(tempGrandpa.history)}
+            response = Response(json.dumps(dic)) # this is how you convert the dic to json response
+            response.status = 200
+            response.headers.add("Access-Control-Allow-Origin", "*") 
+            return response
+            #return re {'status': 200, 'grandpaID':tempGrandpa.username,'history': self.constructHistoryJson(tempGrandpa.history)}
         else:
-            return {'status':500, 'msg': "Unable to find grandpa in database"} # error getting grandpa
+            #dic = {'status':500, 'msg': "Unable to find grandpa in database"}
+            response = Response("Unable to find grandpa in database")
+            response.status = 500
+            response.headers.add("Access-Control-Allow-Origin", "*") 
+            return response
+            #return {'status':500, 'msg': "Unable to find grandpa in database"} # error getting grandpa
         # point1 = {'time': 1234,'lat': 0, 'lon': 0,'bpm': 100}
         # point2 = {'time': 1234,'lat': 0, 'lon': 0,'bpm': 100}
         # point3 = {'time': 1234,'lat': 0, 'lon': 0,'bpm': 100}
