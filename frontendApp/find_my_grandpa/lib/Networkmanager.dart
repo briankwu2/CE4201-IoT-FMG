@@ -13,35 +13,29 @@ class NetowrkManager {
 
   NetowrkManager._internal();
 
-  void login(String username) async {
+  Future<dynamic> login(String username) async {
     // gets grandpa from database and
 
     // get grandpa and save it
     Map<String, String> parmsReq = {'grandpaID': username};
     print("Creating url");
-    //var parsedURL = Uri.parse(fmgURL);
-    //print(parsedURL);
-
     var url = Uri.http(fmgURL, "/grandpa_data/", parmsReq);
-    // var url = Uri.parse('http://127.0.0.1:5000/');
+
     print(url);
     try {
       var response = await http.get(url);
       print(response.statusCode);
-      var jsonDecoded = convert.jsonDecode(response.body);
-      print(jsonDecoded);
+      if (response.statusCode != 200) {
+        return false;
+      } else {
+        var jsonDecoded =
+            convert.jsonDecode(response.body) as Map<String, dynamic>;
+        print(jsonDecoded);
+        return jsonDecoded;
+      }
     } catch (e) {
       print(e);
+      return false;
     }
-    // var response = await http.get(url);
-    // print(response);
-    // if (response.statusCode == 200) {
-    //   // print(response.statusCode);
-    //   print("response successful");
-    //   // var jsonResponse = convert.jsonDecode(response.body) as Map<String, dynamic>;
-    //   // print(jsonResponse.toString());
-    // } else {
-    //   print('Request failed with status: ${response.statusCode}.');
-    // }
   }
 }
