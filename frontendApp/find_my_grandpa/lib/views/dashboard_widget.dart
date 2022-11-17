@@ -127,11 +127,13 @@ class _DashBoardWidgetState extends State<DashBoardWidget> {
                             color: Colors.black12,
                             borderStrokeWidth: 3),
                         popupOptions: PopupOptions(
-                            popupSnap: PopupSnap.mapTop,
+                            popupSnap: PopupSnap.mapCenter,
                             popupController: _popupController,
-                            popupBuilder: (_, marker) => Container(
+                            popupBuilder: (_, marker) => Align(alignment: Alignment.topCenter ,child: Container(
+                                width: 1000,
+                                height: 20,
                                   color: Colors.amberAccent,
-                                  child: Text('Popup'),
+                                  child: Text('Grandpa position at: 9:00 AM' + marker.point.toString())),
                                 )),
                         builder: (context, markers) {
                           return Container(

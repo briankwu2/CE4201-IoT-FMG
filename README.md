@@ -16,6 +16,10 @@ Project structure:
 ----
 ## Todo
 
+- **class requirments**
+    - 2 min video showing thing working
+    - final report
+    - presentation dec 8 and 9 in person
 - **front end app**:
     - UI:
         - Login screen with username and password
@@ -29,7 +33,7 @@ Project structure:
         - login
         - create an account
         - display grandpa info
-        - notification when grandpa is lost
+        - notification when grandpa is lost (email and in webapp)
 
 - **pi**:
     - Data:
@@ -45,6 +49,7 @@ Project structure:
         - make breadboard prototype with all parts working with server
         - solder everything permenantly
         - make it look good for presnetation
+        - battary circuit (**very important**)
 - **server**:
     - Data:
         - store data in DB
