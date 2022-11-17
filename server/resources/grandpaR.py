@@ -24,6 +24,7 @@ class GrandpaR(Resource):
             
             tempGrandpa = self.grandpaModel() # creats empty grandpa
             tempGrandpa.username = usrName
+            # TODO add password to grandpa and ecrypt
             print(tempGrandpa)
             self.db.session.add(tempGrandpa) # adds to db
             self.db.session.commit() # commits chagnes to db
@@ -36,10 +37,12 @@ class GrandpaR(Resource):
             r.status = 500
             return r #{'status': 500, 'msg': 'Grandpa already exists'}
     def get(self):
+        # sends back a grandpa
         gID = request.args['grandpaID'] # grandpa id = username
         tempGrandpa = self.safeLookUpGrandpa(gID)
-        
+        # TODO logic to check if passowrd is correct 
         if tempGrandpa != False:
+            # stuff to send to user
             dic = {'grandpaID':tempGrandpa.username,'history': self.constructHistoryJson(tempGrandpa.history)}
             response = Response(json.dumps(dic)) # this is how you convert the dic to json response
             response.status = 200

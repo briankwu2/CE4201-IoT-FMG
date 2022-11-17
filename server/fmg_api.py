@@ -41,6 +41,7 @@ class Grandpa(db.Model):
     __tablename__ = 'grandpa'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(12), unique=True, nullable=False)
+    # TODO add password section encrypted string
     history = db.relationship('PointLog', backref='grandpa')
 class PointLog(db.Model):
     __tablename__ = 'point'
