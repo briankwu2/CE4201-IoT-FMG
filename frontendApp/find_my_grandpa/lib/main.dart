@@ -1,3 +1,4 @@
+import 'package:find_my_grandpa/views/dashboard_widget.dart';
 import 'package:flutter/material.dart';
 import 'login.dart';
 
@@ -25,7 +26,11 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.grey,
       ),
-      home: LoinPage(),
+      routes: {
+        "/login": (context) => LoinPage(),
+        DashBoardWidget.route: (context) => DashBoardWidget()
+      },
+      initialRoute: "/login",
     );
   }
 }
