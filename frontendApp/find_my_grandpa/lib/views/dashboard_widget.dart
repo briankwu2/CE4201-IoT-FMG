@@ -158,6 +158,13 @@ class _DashBoardWidgetState extends State<DashBoardWidget> {
             Positioned(
                 bottom: 0,
                 child: SfSparkLineChart(
+                  trackball: SparkChartTrackball(
+                      activationMode: SparkChartActivationMode.tap),
+                  //Enable marker
+                  marker: SparkChartMarker(
+                      displayMode: SparkChartMarkerDisplayMode.all),
+                  //Enable data label
+                  labelDisplayMode: SparkChartLabelDisplayMode.all,
                   data: StateManager().getGrandpa().getBPM(),
                 ))
           ],
