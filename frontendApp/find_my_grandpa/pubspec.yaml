@@ -38,6 +38,7 @@ dependencies:
   latlong: ^0.6.1
   flutter_map: any
   flutter_map_marker_cluster: any
+  syncfusion_flutter_charts: ^20.3.57
 
 
 dev_dependencies:

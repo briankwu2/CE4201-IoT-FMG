@@ -22,15 +22,15 @@ Project structure:
     - presentation dec 8 and 9 in person
 - **front end app**:
     - UI:
-        - Login screen with username and password
-        - Dashboad with map with location ploted
-        - dashboard with grandpa name and profile pic (extra credit but not necessary)
-        - BPM graph over time
+        - <s> Login screen with username and password </s>
+        - <s> Dashboad with map with location ploted </s>
+        - <s>dashboard with grandpa name and profile pic (extra credit but not necessary) </s>
+        - <s>BPM graph over time</s>
     - Data:
-        - populate map with points 
-        - generate graph with bpm
+        - <s>populate map with points</s>
+        - <s>generate graph with bpm</s>
     - Functionality:
-        - login
+        - <s>login </s>
         - create an account
         - display grandpa info
         - notification when grandpa is lost (email and in webapp)

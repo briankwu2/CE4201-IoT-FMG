@@ -16,39 +16,22 @@ class LoinPage extends StatefulWidget {
 }
 
 class _LoinPageState extends State<LoinPage> {
-  final myController = TextEditingController();
+  final usrNameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   bool loginFaild = false;
 
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
-    myController.dispose();
+    usrNameController.dispose();
+    passwordController.dispose();
     super.dispose();
   }
 
-  // Widget buildLoginFeild() {
-  //   if (startedLogin) {}
-  //   return FutureBuilder<bool>(
-  //       future: isLoggedIn, // a previously-obtained Future<String> or null
-  //       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-  //         if (snapshot.hasData) {
-  //           if (snapshot.data == true) {
-  //             // logged in successfully
-  //             //Navigator.push(context, route)
-  //           } else {
-  //             // did not log in successfully
-  //           }
-  //         } else {
-  //           return TextField(
-  //               controller: myController,
-  //               decoration: InputDecoration(
-  //                   border: OutlineInputBorder(), labelText: 'Username'));
-  //         }
-  //       });
-  // }
   void loginFunc(BuildContext context) async {
-    bool success = await NetowrkManager().login(myController.text);
+    bool success = await NetowrkManager()
+        .login(usrNameController.text, passwordController.text);
     if (success) {
       // able to login
       Navigator.pushNamed(context, DashBoardWidget.route);
@@ -84,10 +67,18 @@ class _LoinPageState extends State<LoinPage> {
                       Expanded(
                           child: Container(
                         child: TextField(
-                            controller: myController,
+                            controller: usrNameController,
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(),
                                 labelText: 'Username')),
+                      )),
+                      Expanded(
+                          child: Container(
+                        child: TextField(
+                            controller: passwordController,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'Password')),
                       )),
                       Expanded(child: Container())
                     ],

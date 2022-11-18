@@ -15,7 +15,7 @@ class NetowrkManager {
 
   NetowrkManager._internal();
 
-  Future<bool> login(String username) async {
+  Future<bool> login(String username, String password) async {
     // true if login successful
     // false if login unsuccesful
 

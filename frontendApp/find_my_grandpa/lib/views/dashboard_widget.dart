@@ -7,6 +7,7 @@ import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 //import 'package:latlong/latlong.dart';
 // import 'package:latlong/latlong.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 class DashBoardWidget extends StatefulWidget {
   static const String route = "/dashboard";
@@ -45,9 +46,11 @@ class _DashBoardWidgetState extends State<DashBoardWidget> {
 
   @override
   void initState() {
-    _markers = gPos
+    _markers = StateManager()
+        .getGrandpa()
+        .history
         .map((point) => Marker(
-              point: point,
+              point: point.point,
               width: 40,
               height: 40,
               builder: (context) => Icon(
@@ -88,17 +91,18 @@ class _DashBoardWidgetState extends State<DashBoardWidget> {
                             height: 100,
                             child: Image.asset("assets/grandpa.jpg"))))),
             Positioned(
-                bottom: -20,
+                bottom: 0.3 * hegiht,
                 child: Container(
                   width: width,
-                  height: 0.8 * hegiht,
+                  height: 0.5 * hegiht,
                   child: FlutterMap(
                     mapController: _mapController,
                     options: MapOptions(
                       // swPanBoundary: LatLng(13, 77.5),
                       // nePanBoundary: LatLng(13.07001, 77.58),
-                      center: gPos[0],
-                      bounds: LatLngBounds.fromPoints(gPos),
+                      center: StateManager().getGrandpa().firstPoint(),
+                      bounds: LatLngBounds.fromPoints(
+                          StateManager().getGrandpa().getPosList()),
                       zoom: _zoom,
                       plugins: [
                         MarkerClusterPlugin(),
@@ -129,11 +133,15 @@ class _DashBoardWidgetState extends State<DashBoardWidget> {
                         popupOptions: PopupOptions(
                             popupSnap: PopupSnap.mapCenter,
                             popupController: _popupController,
-                            popupBuilder: (_, marker) => Align(alignment: Alignment.topCenter ,child: Container(
-                                width: 1000,
-                                height: 20,
-                                  color: Colors.amberAccent,
-                                  child: Text('Grandpa position at: 9:00 AM' + marker.point.toString())),
+                            popupBuilder: (_, marker) => Align(
+                                  alignment: Alignment.topCenter,
+                                  child: Container(
+                                      width: 1000,
+                                      height: 20,
+                                      color: Colors.amberAccent,
+                                      child: Text(
+                                          'Grandpa position at: 9:00 AM' +
+                                              marker.point.toString())),
                                 )),
                         builder: (context, markers) {
                           return Container(
@@ -146,6 +154,11 @@ class _DashBoardWidgetState extends State<DashBoardWidget> {
                       ),
                     ],
                   ),
+                )),
+            Positioned(
+                bottom: 0,
+                child: SfSparkLineChart(
+                  data: StateManager().getGrandpa().getBPM(),
                 ))
           ],
         ));
