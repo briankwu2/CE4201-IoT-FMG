@@ -76,6 +76,7 @@ class _LoinPageState extends State<LoinPage> {
                           child: Container(
                         child: TextField(
                             controller: passwordController,
+                            obscureText: true,
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(),
                                 labelText: 'Password')),
@@ -91,7 +92,16 @@ class _LoinPageState extends State<LoinPage> {
                       onPressed: () {
                         loginFunc(context);
                       },
-                      child: Text("login"))
+                      child: Text("login")),
+                  Container(
+                    height: 20,
+                    child: Text(""),
+                  ),
+                  // ElevatedButton(
+                  //     onPressed: () {
+                  //       print("Creat account");
+                  //     },
+                  //     child: Text("Creat account"))
                 ],
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,

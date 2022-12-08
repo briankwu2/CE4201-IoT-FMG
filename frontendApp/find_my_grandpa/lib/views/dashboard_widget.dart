@@ -63,6 +63,43 @@ class _DashBoardWidgetState extends State<DashBoardWidget> {
     super.initState();
   }
 
+  grandpaAlert() async {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Grandpa lost'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Grandpa is lost'),
+                Text('Last scene at: '),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Dissmiss'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget triggerAlertGrandpa() {
+    return ElevatedButton(
+      onPressed: () {
+        grandpaAlert();
+      },
+      child: Text("test grandpa alert"),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -71,6 +108,7 @@ class _DashBoardWidgetState extends State<DashBoardWidget> {
         appBar: AppBar(
           title: Text('Map'),
         ),
+        floatingActionButton: triggerAlertGrandpa(),
         body: Stack(
           children: [
             Positioned.fill(

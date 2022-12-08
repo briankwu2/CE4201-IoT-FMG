@@ -31,9 +31,9 @@ Project structure:
         - <s>generate graph with bpm</s>
     - Functionality:
         - <s>login </s>
-        - create an account
-        - display grandpa info
-        - notification when grandpa is lost (email and in webapp)
+        - <s>create an account </s> will not be necessary for presentation
+        - <s>display grandpa info</s>
+        - <s>notification when grandpa is lost (webapp alert) </s>
 
 - **pi**:
     - Data:
