@@ -5,7 +5,7 @@ import threading
 import time
 import numpy as np
 
-otuputFile = "/home/pi/CE4201-IoT-FMG/pi/output/bpm_data.txt"
+otuputFile = "/home/pi/CE4201-IoT-FMG/pi/output/bpm_data.csv"
 f = open(otuputFile,'a')
 class HeartRateMonitor(object):
     """
