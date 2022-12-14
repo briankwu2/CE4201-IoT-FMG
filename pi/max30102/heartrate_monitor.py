@@ -4,6 +4,7 @@ import hrcalc
 import threading
 import time
 import numpy as np
+import os
 
 otuputFile = "/home/pi/CE4201-IoT-FMG/pi/output/bpm_data.csv"
 f = open(otuputFile,'a')
@@ -26,7 +27,8 @@ class HeartRateMonitor(object):
         ir_data = []
         red_data = []
         bpms = []
-
+        if (os.path.isfile(otuputFile) == False):
+            f.write("unixTime,bpm,SpO2\n")
         # run until told to stop
         while not self._thread.stopped:
             # check if any data is available
@@ -58,7 +60,8 @@ class HeartRateMonitor(object):
                                 print("Finger not detected")
                         if self.print_result:
                             # instead of printingi I want to save to file
-                            s =  str(time.time()) + ","+ "BPM:{0},SpO2:{1}".format(self.bpm, spo2) + "\n"
+                            
+                            s =  str(time.time()) + ","+ "{0},{1}".format(self.bpm, spo2) + "\n"
                             self.writeToFile(s)
 
             time.sleep(self.LOOP_TIME)
