@@ -3,6 +3,7 @@ from flask_restful import Resource
 from flask import request
 from flask import Response
 
+key = b'f_eZN-pVBPS-0mZrhI5seaNmaRjVqRAxOXNw46m7aSU='
 class LogGrandpa(Resource):
 
     def __init__(self, **kwargs):

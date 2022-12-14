@@ -5,7 +5,7 @@ from sqlalchemy import true
 import time
 # test parameters
 
-url = 'http://127.0.0.1:5000'
+url = 'http://ec2-3-20-227-73.us-east-2.compute.amazonaws.com'#'http://127.0.0.1:5000'
 pasColor = '\33[92m'
 failColor = '\33[91m'
 normalColor = '\33[0m'
@@ -65,7 +65,7 @@ except:
 try:
     gp_data = {'grandpaID': 'miguel123', 'password': 'password'}
     response3 = requests.get(url+'/grandpa_data/',params=gp_data)
-    #print(response3.json())
+    print(response3.json())
     if response3.status_code == 200:
         printTestMsg(True,"correct grandpa retrival")
     else:
@@ -76,9 +76,9 @@ except:
 
 # test 5 log position for grandpa
 try:
-    gp_data = {'grandpaID': 'miguel123','password': 'password','bpm': 70, 'lat': 32.98821483333334, 'log': -96.77045733333335, 'time': time.time()}
+    gp_data = {'grandpaID': 'miguel123','bpm': 70, 'lat': 32.98821483333334, 'log': -96.77045733333335, 'time': time.time()}
     response3 = requests.post(url+'/log_grandpa_data/',data=gp_data)
-    #print(response3.json())
+    print(response3.json())
     if response3.status_code == 200:
         printTestMsg(True,"log grandpa pos")
     else:

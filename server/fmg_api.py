@@ -52,7 +52,7 @@ class Grandpa(db.Model):
 class PointLog(db.Model):
     __tablename__ = 'point'
     id = db.Column(db.Integer, primary_key=True)
-    time = db.Column(db.Integer,nullable=False) # in unix time
+    time = db.Column(db.Float,nullable=False) # in unix time
     lat = db.Column(db.Float, nullable=False)
     log = db.Column(db.Float, nullable=False)
     bpm = db.Column(db.Integer, nullable=False)
