@@ -5,6 +5,7 @@ from flask import request
 from flask import Response
 import json
 from cryptography.fernet import Fernet
+
 #key for password
 key = b'f_eZN-pVBPS-0mZrhI5seaNmaRjVqRAxOXNw46m7aSU='
 
@@ -27,6 +28,7 @@ class GrandpaR(Resource):
         if grandPaLookup == False:
             
             tempGrandpa = self.grandpaModel() # creats empty grandpa
+            tempGrandpa.password = self.encrypt(pw) # saves password encrypted
             tempGrandpa.username = usrName
 
             #tempGrandpa.password = encrypter(pw)

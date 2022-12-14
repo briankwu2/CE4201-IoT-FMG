@@ -30,7 +30,7 @@ except:
 
 # test 2 create grandpa
 try:
-    gp_data = {'username': 'miguel123'}
+    gp_data = {'username': 'miguel123', 'password': 'password'}
     response2 = requests.post(url+'/grandpa_data/',data=gp_data)
     print(response2.json())
     if response2.json()['status'] == 200:

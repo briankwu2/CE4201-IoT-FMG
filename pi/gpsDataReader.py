@@ -5,6 +5,10 @@ import webbrowser           #import package for opening link in browser
 import sys                  #import system package
 import datetime
 import os
+
+
+OUTPUT_FILE_PATH = "output/position.csv"
+
 def GPS_Info():
     global NMEA_buff
     global lat_in_degrees
@@ -58,7 +62,7 @@ def writeToFile(lat,lon):
     f.write(str(datetime.datetime.now())+ "," + str(lat) + "," + str(lon) + "\n")
     pass
 
-f = open("output/position.csv",'a')
+f = open(OUTPUT_FILE_PATH,'a')
 
 gpgga_info = "$GPGGA,"
 ser = serial.Serial ("/dev/ttyAMA0")              #Open port with baud rate
@@ -68,7 +72,7 @@ lat_in_degrees = 0
 long_in_degrees = 0
 
 try:
-    if (os.path.isfile("position.csv") == False):
+    if (os.path.isfile(OUTPUT_FILE_PATH) == False):
         f.write("date,lat,lon\n")
     i = 0
     while True:

@@ -21,7 +21,10 @@ class NetowrkManager {
 
     // gets grandpa from database and
     // get grandpa and save it
-    Map<String, String> parmsReq = {'grandpaID': username};
+    Map<String, String> parmsReq = {
+      'grandpaID': username,
+      'password': password
+    };
     print("Creating url");
     var url = Uri.http(fmgURL, "/grandpa_data/", parmsReq);
 
