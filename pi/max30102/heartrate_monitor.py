@@ -58,7 +58,7 @@ class HeartRateMonitor(object):
                                 print("Finger not detected")
                         if self.print_result:
                             # instead of printingi I want to save to file
-                            s =  str(time.time()) + ","+ "BPM: {0}, SpO2: {1}".format(self.bpm, spo2) + "\n"
+                            s =  str(time.time()) + ","+ "BPM:{0},SpO2:{1}".format(self.bpm, spo2) + "\n"
                             self.writeToFile(s)
 
             time.sleep(self.LOOP_TIME)
