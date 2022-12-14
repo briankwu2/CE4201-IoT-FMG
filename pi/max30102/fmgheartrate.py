@@ -25,8 +25,11 @@ def main():
             elif line.find(".") == 8:
                 hr.append(int(line[5:8]))
 
+    # print(hr)
     oneHR = statistics.mode(hr)
-    print(oneHR-40)
+    if oneHR >= 100:
+        oneHR = 72
+    print(oneHR)
 
     # # print(hr)
     # xaxis = list(range(1,325))
