@@ -2,13 +2,15 @@ import statistics
 
 inputFileName = "bpm_data.txt"
 
+
 def main():
     # read file
     file = open(inputFileName)
     lines = file.readlines()
     file.close()
 
-    hr = [None] * 324 
+    # hr = [None] * 324 
+    hr = []
     counter = 0
 
     # look for patterns
@@ -18,13 +20,11 @@ def main():
         if line.find("BPM:")!=-1:
 
             if line.find(".") == 7:
-                hr[counter] = int(line[5:7])
+                hr.append(int(line[5:7]))
 
             elif line.find(".") == 8:
-                hr[counter] = int(line[5:8])
-        
-            counter = counter + 1
-    
+                hr.append(int(line[5:8]))
+
     oneHR = statistics.mode(hr)
     print(oneHR-40)
 
