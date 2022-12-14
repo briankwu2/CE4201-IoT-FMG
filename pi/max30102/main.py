@@ -13,6 +13,8 @@ def save():
     
 
     pass
+
+save()
 parser = argparse.ArgumentParser(description="Read and print data from MAX30102")
 parser.add_argument("-r", "--raw", action="store_true",
                     help="print raw data instead of calculation result")
