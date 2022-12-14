@@ -19,8 +19,10 @@ def printTestMsg(didPass:bool,msg:str):
 
 # health checker
 try:
+    #print("trying health checker")
     response1 = requests.get(url)
-    print(response1.json())
+    #print(response1)
+    #print(response1.json())
     if response1.status_code == 200:
         printTestMsg(True,"health check")
     else:
@@ -32,21 +34,25 @@ except:
 try:
     gp_data = {'username': 'miguel123', 'password': 'password'}
     response2 = requests.post(url+'/grandpa_data/',data=gp_data)
-    print(response2.json())
-    if response2.json()['status'] == 200:
+    #print(response2.json())
+    if response2.status_code == 200:
         printTestMsg(True,"grandpa creation")
     else:
-        printTestMsg(False,"grandpa creation")
+        if response2.status_code == 500:
+
+            printTestMsg(False,"grandpa already exists")
+        else:
+            printTestMsg(False, "grandpa creation")
 except:
     printTestMsg(False,"grandpa creation")
 
 
 # test 3 gets incorrect grandpa
 try:
-    gp_data = {'grandpaID': '2'}
+    gp_data = {'grandpaID': '2', 'password': 'password'}
     response3 = requests.get(url+'/grandpa_data/',params=gp_data)
-    print(response3.json())
-    if response3.json()['status'] == 500:
+    #print(response3.json())
+    if response3.status_code == 500:
         printTestMsg(True,"incorrect grandpa retrival")
     else:
         printTestMsg(False,"incorrect grandpa retrival")
@@ -57,10 +63,10 @@ except:
 
 # test 4 gets correct grandpa
 try:
-    gp_data = {'grandpaID': 'miguel123'}
+    gp_data = {'grandpaID': 'miguel123', 'password': 'password'}
     response3 = requests.get(url+'/grandpa_data/',params=gp_data)
-    print(response3.json())
-    if response3.json()['status'] == 200:
+    #print(response3.json())
+    if response3.status_code == 200:
         printTestMsg(True,"correct grandpa retrival")
     else:
         printTestMsg(False,"correct grandpa retrival")
@@ -70,10 +76,10 @@ except:
 
 # test 5 log position for grandpa
 try:
-    gp_data = {'grandpaID': 'miguel123','bpm': 70, 'lat': 100, 'log': 200, 'time': 1}
+    gp_data = {'grandpaID': 'miguel123','password': 'password','bpm': 70, 'lat': 100, 'log': 200, 'time': 1}
     response3 = requests.post(url+'/log_grandpa_data/',data=gp_data)
-    print(response3.json())
-    if response3.json()['status'] == 200:
+    #print(response3.json())
+    if response3.status_code == 200:
         printTestMsg(True,"log grandpa pos")
     else:
         printTestMsg(False,"log grandpa pos")
