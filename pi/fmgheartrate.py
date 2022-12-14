@@ -1,9 +1,11 @@
 import matplotlib.pyplot as plt
 import statistics
 
+inputFileName = "bpm_data.txt"
+
 def main():
     # read file
-    file = open("miguel_hr.txt")
+    file = open(inputFileName)
     lines = file.readlines()
     file.close()
 
