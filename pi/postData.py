@@ -5,7 +5,7 @@ import datetime
 # sends to server the new data
 # should run every minute
 
-SERVER_URL =   "http://127.0.0.1:5000"
+SERVER_URL =   "http://192.168.1.151:5000" # my computer in my netowrk should change to aws
 OUTPUTFILE_POS = "/home/pi/CE4201-IoT-FMG/pi/output/position.csv"
 OUTPUTFILE_BPM = "/home/pi/CE4201-IoT-FMG/pi/output/bpm_data.csv"
 OUTPUTFILE_POSTS = "/home/pi/CE4201-IoT-FMG/pi/output/grandapData.log"
