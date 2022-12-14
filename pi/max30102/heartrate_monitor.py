@@ -5,8 +5,8 @@ import threading
 import time
 import numpy as np
 import datetime
-otuputFile = "output/bpm_data.txt"
-f = open("output/position.csv",'a')
+otuputFile = "/home/pi/CE4201-IoT-FMG/pi/output/bpm_data.txt"
+f = open(otuputFile,'a')
 class HeartRateMonitor(object):
     """
     A class that encapsulates the max30102 device into a thread
