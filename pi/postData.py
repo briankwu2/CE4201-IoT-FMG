@@ -28,7 +28,7 @@ def getBpmData():
         # temp algorthim only gets the last one
         lastLine:str = f.readlines()[-1] # gets the last line
         data = lastLine.split(",") # unix time, bpm, SpO2
-        return data[:1] # returns up to the bpm
+        return data[:2] # returns up to the bpm
     except:
         print("unable to find bpm file")
     pass
