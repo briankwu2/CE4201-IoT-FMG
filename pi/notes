@@ -1,1 +1,4 @@
 pi: 192.168.200.73
+can be obtained through nmap of the network
+
+to get heart rate data run main.py inside of max30102

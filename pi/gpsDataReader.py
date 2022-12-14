@@ -58,7 +58,7 @@ def writeToFile(lat,lon):
     f.write(str(datetime.datetime.now())+ "," + str(lat) + "," + str(lon) + "\n")
     pass
 
-f = open("position.csv",'a')
+f = open("output/position.csv",'a')
 
 gpgga_info = "$GPGGA,"
 ser = serial.Serial ("/dev/ttyAMA0")              #Open port with baud rate
