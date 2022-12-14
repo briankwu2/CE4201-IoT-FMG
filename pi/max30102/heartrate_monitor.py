@@ -4,7 +4,7 @@ import hrcalc
 import threading
 import time
 import numpy as np
-
+import datetime
 otuputFile = "output/bpm_data.txt"
 f = open("output/position.csv",'a')
 class HeartRateMonitor(object):
@@ -58,7 +58,7 @@ class HeartRateMonitor(object):
                                 print("Finger not detected")
                         if self.print_result:
                             # instead of printingi I want to save to file
-                            s = "BPM: {0}, SpO2: {1}".format(self.bpm, spo2)
+                            s =  str(datetime.datetime.now()) + ","+ "BPM: {0}, SpO2: {1}".format(self.bpm, spo2)
                             self.writeToFile(s)
 
             time.sleep(self.LOOP_TIME)
