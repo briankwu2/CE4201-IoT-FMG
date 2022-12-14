@@ -7,7 +7,7 @@ import datetime
 import os
 
 
-OUTPUT_FILE_PATH = "output/position.csv"
+OUTPUT_FILE_PATH = "/home/pi/output/position.csv"
 
 def GPS_Info():
     global NMEA_buff
