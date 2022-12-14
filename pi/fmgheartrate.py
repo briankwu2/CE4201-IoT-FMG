@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import statistics
 
 def main():
     # read file
@@ -8,27 +9,23 @@ def main():
 
     hr = [None] * 324 
     counter = 0
+
     # look for patterns
     for line in lines:
 
         line = line.strip()
         if line.find("BPM:")!=-1:
-            
-            # print(line.find(":"))
 
             if line.find(".") == 7:
                 hr[counter] = int(line[5:7])
-                # print(line[5:7])
+
             elif line.find(".") == 8:
                 hr[counter] = int(line[5:8])
-                # print(line[5:8])
-
-            print(hr[counter])
-            if (hr[counter] - hr[counter - 1]) >= 25:
-                hr[counter] = hr[counter - 1]
-
+        
             counter = counter + 1
     
+    oneHR = statistics.mode(hr)
+    print(oneHR-40)
     # print(hr)
     xaxis = list(range(1,325))
     # print(xaxis)
