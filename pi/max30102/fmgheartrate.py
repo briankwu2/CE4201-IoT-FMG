@@ -11,7 +11,6 @@ def main():
 
     # hr = [None] * 324 
     hr = []
-    counter = 0
 
     # look for patterns
     for line in lines:
@@ -26,10 +25,15 @@ def main():
                 hr.append(int(line[5:8]))
 
     # print(hr)
-    oneHR = statistics.mode(hr)
-    if oneHR >= 100:
-        oneHR = 72
+    # print(hr[1])
+    oneHR = statistics.median_low(hr)
+    # if oneHR >= 100:
+    #     oneHR = 72
     print(oneHR)
+
+    # counter = 0
+    # if hr[counter+1] - hr[counter] > 25:
+
 
     # # print(hr)
     # xaxis = list(range(1,325))
