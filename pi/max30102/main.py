@@ -1,7 +1,18 @@
 from heartrate_monitor import HeartRateMonitor
 import time
 import argparse
+import os
 
+
+
+def save():
+    num = len(os.listdir("output/"))
+    otuputFile = "output/bpm_data" + "_" + str(num) + ".txt"
+    print(otuputFile)
+    os.system("mv output/bpm_data.txt " + otuputFile)
+    
+
+    pass
 parser = argparse.ArgumentParser(description="Read and print data from MAX30102")
 parser.add_argument("-r", "--raw", action="store_true",
                     help="print raw data instead of calculation result")

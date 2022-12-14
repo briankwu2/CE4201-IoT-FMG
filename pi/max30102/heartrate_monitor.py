@@ -5,7 +5,8 @@ import threading
 import time
 import numpy as np
 
-
+otuputFile = "output/bpm_data.txt"
+f = open("output/position.csv",'a')
 class HeartRateMonitor(object):
     """
     A class that encapsulates the max30102 device into a thread
@@ -56,7 +57,9 @@ class HeartRateMonitor(object):
                             if self.print_result:
                                 print("Finger not detected")
                         if self.print_result:
-                            print("BPM: {0}, SpO2: {1}".format(self.bpm, spo2))
+                            # instead of printingi I want to save to file
+                            s = "BPM: {0}, SpO2: {1}".format(self.bpm, spo2)
+                            self.writeToFile(s)
 
             time.sleep(self.LOOP_TIME)
 
@@ -71,3 +74,7 @@ class HeartRateMonitor(object):
         self._thread.stopped = True
         self.bpm = 0
         self._thread.join(timeout)
+    
+    def writeToFile(self,s:str):
+        f.write(s)
+    
