@@ -6,9 +6,9 @@ import requests
 # should run every minute
 
 SERVER_URL =   "http://127.0.0.1:5000/"
-OUTPUTFILE_POS = ""
-OUTPUTFILE_BPM = ""
-def getLatLog():
+OUTPUTFILE_POS = "/home/pi/CE4201-IoT-FMG/pi/output/position.csv"
+OUTPUTFILE_BPM = "/home/pi/CE4201-IoT-FMG/pi/output/bpm_data.csv"
+def getPosData():
     # returns array of lat and log
     try:
         f = open(OUTPUTFILE_POS,"r")
@@ -19,7 +19,7 @@ def getLatLog():
         print("Error opening file")
     pass
 
-def getBpm():
+def getBpmData():
     # returns bpm and time 
     # should use mike's algorthim to figroue otu what bpm to pump out
     try:
@@ -36,6 +36,14 @@ def getBpm():
 
 def sendData():
     # sends the data to the server
+    
+    posData = getPosData()
+    bpmData = getBpmData()
+    gp_data = {'grandpaID': 'miguel123','bpm': bpmData[1], 'lat': posData[0], 'log': posData[1], 'time': bpmData[0]}
+    print(gp_data)
     pass
 
-gp_data = {'grandpaID': 'miguel123','bpm': 70, 'lat': 100, 'log': 200, 'time': 1}
+
+sendData()
+
+
