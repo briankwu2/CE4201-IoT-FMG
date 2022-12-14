@@ -2,7 +2,7 @@
 
 import requests
 from sqlalchemy import true
-
+import time
 # test parameters
 
 url = 'http://127.0.0.1:5000'
@@ -76,7 +76,7 @@ except:
 
 # test 5 log position for grandpa
 try:
-    gp_data = {'grandpaID': 'miguel123','password': 'password','bpm': 70, 'lat': 100, 'log': 200, 'time': 1}
+    gp_data = {'grandpaID': 'miguel123','password': 'password','bpm': 70, 'lat': 32.98821483333334, 'log': -96.77045733333335, 'time': time.time()}
     response3 = requests.post(url+'/log_grandpa_data/',data=gp_data)
     #print(response3.json())
     if response3.status_code == 200:
