@@ -39,7 +39,7 @@ def sendData():
     
     posData = getPosData()
     bpmData = getBpmData()
-    gp_data = {'grandpaID': 'miguel123','bpm': bpmData[1], 'lat': posData[0], 'log': posData[1], 'time': bpmData[0]}
+    gp_data = {'grandpaID': 'miguel123','bpm':float(bpmData[1]), 'lat': float(posData[0]), 'log': float(posData[1]), 'time': float(bpmData[0])}
     print(gp_data)
     pass
 
