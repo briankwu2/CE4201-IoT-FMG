@@ -1,6 +1,7 @@
 
 from flask_restful import Resource
 from flask import request
+from flask import Response
 
 class LogGrandpa(Resource):
 
@@ -24,9 +25,13 @@ class LogGrandpa(Resource):
             tempLogPoint.grandpaID = int(grandpaRef.id) # assignes the matching grandpa id 
             self.db.session.add(tempLogPoint)
             self.db.session.commit()
-            return {'status': 200}
+            response = Response("logged successfully")
+            response.status = 200
+            return response#{'status': 200}
         else:
-            return {'status': 500, 'msg': 'Unable to find grandpa'}
+            response = Response("Unable to find grandpa")
+            response.status = 500
+            return response#{'status': 500, 'msg': 'Unable to find grandpa'}
         
         
 
