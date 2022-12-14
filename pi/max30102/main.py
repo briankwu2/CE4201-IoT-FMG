@@ -4,12 +4,12 @@ import argparse
 import os
 
 
-
+otuputPath = "/home/pi/CE4201-IoT-FMG/pi/output/"
 def save():
-    num = len(os.listdir("output/"))
-    otuputFile = "output/bpm_data" + "_" + str(num) + ".txt"
+    num = len(os.listdir(otuputPath))
+    otuputFile = otuputPath+"bpm_data" + "_" + str(num) + ".txt"
     print(otuputFile)
-    os.system("mv output/bpm_data.txt " + otuputFile)
+    os.system("mv " + otuputFile + " " + otuputFile)
     
 
     pass
