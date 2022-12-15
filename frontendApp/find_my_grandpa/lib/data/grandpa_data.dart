@@ -40,7 +40,7 @@ class GrandpaData {
   List<double> getBPM() {
     List<double> bpmList = [];
     for (int i = 0; i < history.length; i++) {
-      bpmList.add(history[i].bpm + i);
+      bpmList.add(history[i].bpm);
     }
     return bpmList;
   }

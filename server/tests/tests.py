@@ -76,12 +76,12 @@ except:
 
 # test 5 log position for grandpa
 try:
-    gp_data = {'grandpaID': 'miguel123','bpm': 70, 'lat': 32.98821483333334, 'log': -96.77045733333335, 'time': time.time()}
+    gp_data = {'grandpaID': 'miguel123','bpm': 70, 'lat': 32.98821483333334, 'log': -96.77045733333335, 'time': int(time.time())}
     response3 = requests.post(url+'/log_grandpa_data/',data=gp_data)
-    print(response3.json())
+    #print(response3.json())
     if response3.status_code == 200:
         printTestMsg(True,"log grandpa pos")
     else:
         printTestMsg(False,"log grandpa pos")
 except:
-    printTestMsg(False,"log grandpa pos")
+    printTestMsg(False,"due to exception")
