@@ -28,7 +28,7 @@ def getBpmData():
         # use algorthim he has
         # temp algorthim only gets the last one
         lastLine:str = f.readlines()[-1] # gets the last line
-        data = lastLine.split(",") # unix time, bpm, SpO2
+        data = lastLine.split(",") # unix time, bpm, SpO2float
         return data[:2] # returns up to the bpm
     except:
         print("unable to find bpm file")
@@ -47,7 +47,7 @@ def sendData():
     
     posData = getPosData()
     bpmData = getBpmData()
-    gp_data = {'grandpaID': 'miguel123','bpm':int(bpmData[1]), 'lat': float(posData[0]), 'log': float(posData[1]), 'time': int(bpmData[0])}
+    gp_data = {'grandpaID': 'miguel123','bpm':int(bpmData[1]), 'lat': float(posData[0]), 'log': float(posData[1]), 'time': int(float(bpmData[0]))}
     print(gp_data)
     response = requests.post(SERVER_URL + '/log_grandpa_data/',data=gp_data)
     print(response.status_code)
