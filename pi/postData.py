@@ -47,10 +47,10 @@ def sendData():
     
     posData = getPosData()
     bpmData = getBpmData()
-    gp_data = {'grandpaID': 'miguel123','bpm':float(bpmData[1]), 'lat': float(posData[0]), 'log': float(posData[1]), 'time': int(bpmData[0])}
+    gp_data = {'grandpaID': 'miguel123','bpm':int(bpmData[1]), 'lat': float(posData[0]), 'log': float(posData[1]), 'time': int(bpmData[0])}
     print(gp_data)
     response = requests.post(SERVER_URL + '/log_grandpa_data/',data=gp_data)
-    print(response)
+    print(response.status_code)
     logResponse(response,'/log_grandpa_data/')
     
 
