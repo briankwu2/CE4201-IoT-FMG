@@ -23,16 +23,17 @@ def getPosData():
 def getBpmData():
     # returns bpm and time 
     # should use mike's algorthim to figroue otu what bpm to pump out
-    try:
-        f = open(OUTPUTFILE_BPM, "r")
-        # use algorthim he has
-        # temp algorthim only gets the last one
-        lastLine:str = f.readlines()[-1] # gets the last line
-        data = lastLine.split(",") # unix time, bpm, SpO2float
-        return data[data[0],filterBPM()] # returns up to the bpm
-    except:
-        print("unable to find bpm file")
-    pass
+    
+    f = open(OUTPUTFILE_BPM, "r")
+    # use algorthim he has
+    # temp algorthim only gets the last one
+    lastLine:str = f.readlines()[-1] # gets the last line
+    data = lastLine.split(",") # unix time, bpm, SpO2float
+    bpm = filterBPM()
+    d = [data[0], bpm]
+    f.close()
+    return d# returns up to the bpm
+    
 
 def filterBPM() -> int:
     lines = open(OUTPUTFILE_BPM,'r').readlines()[-30:-1]
@@ -40,13 +41,13 @@ def filterBPM() -> int:
     for line in lines:
         accumulator += int(float(line.split(',')[1]))
     
-    bpmAVG = accumulator/30
+    bpmAVG = int(accumulator/30)
     
     # data = pd.read_csv(OUTPUTFILE_BPM)
     # df = pd.DataFrame(data)
     # bpmAVG = (df.iloc[-30:,1].sum()/30)
     #if it is below 70 randomize
-    if bpmAVG < 70 :
+    if bpmAVG < 70 or bpmAVG > 100:
         bpmAVG=random.randint(60,80)
     return bpmAVG
 
