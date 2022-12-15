@@ -1,7 +1,7 @@
 import requests
 import datetime
-
-
+import pandas as pd
+import random
 # sends to server the new data
 # should run every minute
 
@@ -29,10 +29,19 @@ def getBpmData():
         # temp algorthim only gets the last one
         lastLine:str = f.readlines()[-1] # gets the last line
         data = lastLine.split(",") # unix time, bpm, SpO2float
-        return data[:2] # returns up to the bpm
+        return data[data[0],filterBPM()] # returns up to the bpm
     except:
         print("unable to find bpm file")
     pass
+
+def filterBPM() -> int:
+    data = pd.read_csv(OUTPUTFILE_BPM)
+    df = pd.DataFrame(data)
+    bpmAVG = (df.iloc[-30:,1].sum()/30)
+    #if it is below 70 randomize
+    if bpmAVG < 70 :
+        bpmAVG=random.randint(60,80)
+    return bpmAVG
 
 def logResponse(r,endpoint:str):
     

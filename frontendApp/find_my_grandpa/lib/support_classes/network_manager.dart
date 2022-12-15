@@ -7,7 +7,8 @@ import 'dart:convert' as convert;
 
 class NetowrkManager {
   static final NetowrkManager _netowrkManager = NetowrkManager._internal();
-  static final String fmgURL = '127.0.0.1:5000';
+  static final String fmgURL =
+      'ec2-3-20-227-73.us-east-2.compute.amazonaws.com'; //'127.0.0.1:5000';
 
   factory NetowrkManager() {
     return _netowrkManager;
