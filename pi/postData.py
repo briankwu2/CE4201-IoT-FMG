@@ -1,6 +1,6 @@
 import requests
 import datetime
-import pandas as pd
+
 import random
 # sends to server the new data
 # should run every minute
@@ -35,9 +35,16 @@ def getBpmData():
     pass
 
 def filterBPM() -> int:
-    data = pd.read_csv(OUTPUTFILE_BPM)
-    df = pd.DataFrame(data)
-    bpmAVG = (df.iloc[-30:,1].sum()/30)
+    lines = open(OUTPUTFILE_BPM,'r').readlines()[-30:-1]
+    accumulator = 0
+    for line in lines:
+        accumulator += int(float(line.split(',')[1]))
+    
+    bpmAVG = accumulator/30
+    
+    # data = pd.read_csv(OUTPUTFILE_BPM)
+    # df = pd.DataFrame(data)
+    # bpmAVG = (df.iloc[-30:,1].sum()/30)
     #if it is below 70 randomize
     if bpmAVG < 70 :
         bpmAVG=random.randint(60,80)
