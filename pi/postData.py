@@ -38,7 +38,7 @@ def logResponse(r,endpoint:str):
     
     # saves send msgs to log file for debugin purpuses
     f = open(OUTPUTFILE_POSTS,'a')
-    s = str(datetime.datetime()) + " " + SERVER_URL+endpoint + " " +  str(r.status_code) + "\n"
+    s = str(datetime.date.today()) + " " + SERVER_URL+endpoint + " " +  str(r.status_code) + "\n"
     f.write(s)
     pass
 
